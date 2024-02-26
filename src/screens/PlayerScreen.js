@@ -7,7 +7,7 @@ export default function PlayerScreen({player}) {
 
     useEffect(() => {
         setSelectedCard(player.cardList[0])
-    }, []);
+    }, [player.cardList]);
  
     return (
         <div>
