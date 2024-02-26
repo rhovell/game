@@ -1,46 +1,50 @@
 import './styles/MainScreen.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import opponent_Data from '../data/opponent.json';
-import player_Data from '../data/player.json';
+// import opponent_Data from '../data/opponent.json';
+// import player_Data from '../data/player.json';
 import PlayerScreen from './PlayerScreen.js'
 import NavBar from './components/navbar.js';
 
-export default function MainScreen() {
+export default function MainScreen(player_Data, opponent_Data) {
 
-    const [attacker, setAttacker] = useState('');
-    const [defender, setDefender] = useState('');
-    const [player, setPlayer] = useState('');
-    const [computer, setComputer] = useState('');
     const [round, setRound] = useState(1);
+    const [playersTurn, setPlayersTurn] = useState(true);
+
 
     useEffect(() => {
         let playerInfo = player_Data;
         let opponentInfo = opponent_Data;
-        setPlayer(playerInfo)
-        setComputer(opponentInfo)
- 
-        console.warn('decision', player);
-        let playerCard = player.cardList[0];
+
+
+        console.warn('decision', playerInfo);
+        let playerCard = playerInfo.cardList[0];
         let player_speed = playerCard.speed;
-        let opponentCard = computer.cardList[0];
+        let opponentCard = opponentInfo.cardList[0];
         let opponent_speed = opponentCard.speed;
         let fastest = Math.max(player_speed, opponent_speed)
         // console.warn('fastest', fastest);
         if (fastest === player_speed) {
-            setAttacker(playerCard)
-            setDefender(opponentCard)
+            setPlayersTurn(true)
         } else {
-            setAttacker(opponentCard)
-            setDefender(playerCard)
+            setPlayersTurn(false)
+
         }
-    }, [player, setPlayer, computer, setComputer, attacker, defender]);
+        runTurn()
+    }, [playersTurn, setPlayersTurn, runTurn]);
 
 
-    useEffect(() => {
-        // function runTurn(){
+    // useEffect(() => {
+        function runTurn(){
             // console.warn('attacker',attacker);
-            
+            let attacker, defender;
+            if(playersTurn === true){
+                attacker = player_Data;
+                defender = opponent_Data;
+            } else {
+                attacker = opponent_Data;
+                defender = player_Data;
+            }
             var random = Math.random() * 100;
     
             // callstack 
@@ -96,15 +100,15 @@ export default function MainScreen() {
                 let newHealth = defender.healthpoints - damageDealt;
                 defender.healthpoints = newHealth;
                 console.warn('defender.healthpoints', defender.healthpoints);
-                if (computer.creature === defender.creature) {
-                    computer.healthpoints = newHealth;
-                } else if (player.creature === defender.creature) {
-                    player.healthpoints = newHealth;
+                if (opponent_Data.creature === defender.creature) {
+                    opponent_Data.healthpoints = newHealth;
+                } else if (player_Data.creature === defender.creature) {
+                    player_Data.healthpoints = newHealth;
                 }
             }
             function tryAgain() {
-                let playerCard = player.cardList[0];
-                let opponentCard = computer.cardList[1];
+                let playerCard = player_Data.cardList[0];
+                let opponentCard = opponent_Data.cardList[1];
                 let player_speed = playerCard.speed;
                 let opponent_speed = opponentCard.speed;
                 let newFastest = Math.max(player_speed, opponent_speed)
@@ -121,53 +125,58 @@ export default function MainScreen() {
             }
             function secondmiss() {
                 console.warn('second miss');
-                // endTurn()
+                endTurn()
             }
             function secondhit() {
                 console.warn('second hit');
                 calculateDamage()
-                // endTurn()
+                endTurn()
             }
         
-        // }
-    }, [round, attacker, defender, player, computer])
-
-    useEffect(() => {
-            function switchPlayer(){
-            let playerCard = player.cardList[0];
-            let opponentCard = computer.cardList[0];
-            if (playerCard.creature === attacker.creature) {
-                setAttacker(opponentCard)
-                setDefender(playerCard)
-            } else if (opponentCard.creature === attacker.creature) {
-                setAttacker(playerCard)
-                setDefender(opponentCard)
-            }
         }
-        }, [player, computer, attacker, defender])
+    // }, [round, attacker, defender, player, computer])
+
+    // useEffect(() => {
+        function switchPlayer(){
+            let attacker, defender;
+            if (playersTurn === true) {
+                attacker = player_Data;
+                defender = opponent_Data;
+            } else {
+                attacker = opponent_Data;
+                defender = player_Data;
+            }
+            let playerCard = player_Data.cardList[0];
+            let opponentCard = opponent_Data.cardList[0];
+            if (playerCard.creature === attacker.creature) {
+                setPlayersTurn(false)
+            } else if (opponentCard.creature === attacker.creature) {
+                setPlayersTurn(true)
+            }
+            runTurn()
+        }
+        // }, [player, computer, attacker, defender])
     
-    useEffect(() => {
-        // function // endTurn() {
+    // useEffect(() => {
+        function endTurn() {
             setRound(round => round + 1)
             console.warn('end turn round:', round);
-            let playerCard = player.cardList[0];
-            let opponentCard = computer.cardList[0];
+            let playerCard = player_Data.cardList[0];
+            let opponentCard = opponent_Data.cardList[0];
             if (playerCard.healthpoints > 0 && opponentCard.healthpoints > 0) {
-                // switchPlayer()
-                // runTurn()
-    
+                switchPlayer()
             } else if(playerCard.healthpoints <= 0 || opponentCard.healthpoints <= 0){
                 console.warn('end game!', );
             }
     
-        // }
-    }, [player, computer, attacker, defender, round])
+        }
+    // }, [player, computer, attacker, defender, round])
 
     
 
     return (
         <main className="main">
-            <div className="main-game-area" attacker={attacker}>
+            <div className="main-game-area">
                 <div className="player screen_half">
                     <div className="player-screen">
                         <PlayerScreen player={player_Data}></PlayerScreen>
