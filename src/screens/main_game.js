@@ -70,26 +70,26 @@ export default function MainScreen() {
 
     }
     
-    function calculateMiss(){
-        let missChance = 1 * ((defender.speed * defender.weaponskill) / (attacker.speed * attacker.weaponskill))
-        console.warn('missChance', attacker.creature, missChance);
-        return missChance;
-    }
-
-    function calculateParry(){
-        let parryChance = 2 * (defender.speed * defender.weaponskill * defender.toughness) / (attacker.speed * attacker.weaponskill * attacker.strength)
-        console.warn('parryChance', defender.creature, parryChance);
-    }
     function runTurn(){
         // console.warn('attacker',attacker);
-
+        
         var random = Math.random() * 100
-        if (random > 0 && random < missChance()) {
-            miss()
-        } else if (random >= missChance() && random < 100) {
-            hit()
+        
+        function calculateMiss(){
+            let missChance = 1 * ((defender.speed * defender.weaponskill) / (attacker.speed * attacker.weaponskill))
+            console.warn('missChance', attacker.creature, missChance);
+            // missChance;
+            if (random > 0 && random < missChance()) {
+                miss()
+            } else if (random >= missChance() && random < 100) {
+                hit()
+            }
         }
-
+    
+        function calculateParry(){
+            let parryChance = 2 * (defender.speed * defender.weaponskill * defender.toughness) / (attacker.speed * attacker.weaponskill * attacker.strength)
+            console.warn('parryChance', defender.creature, parryChance);
+        }
         function miss() {
             // console.warn('miss');
             tryAgain()
