@@ -1,0 +1,29 @@
+{
+    "username": "player",
+    "level": 1,
+    "points": 0,
+    "cardList": [
+        {
+            "creature": "wolpertinger",
+            "level": 1,
+            "healthpoints": 30,
+            "weaponskill": 8,
+            "strength": 3,
+            "toughness": 4,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 9
+        },
+        {
+            "creature": "troll",
+            "level": 1,
+            "healthpoints": 50,
+            "weaponskill": 2,
+            "strength": 10,
+            "toughness": 10,
+            "manapoints": 0,
+            "magicresistance": 2,
+            "speed": 3
+        }
+    ]
+}
