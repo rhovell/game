@@ -3,7 +3,7 @@ import MainScreen from './screens/main_game.js'
 import opponent_Data from './data/opponent.json';
 import player_Data from './data/player.json';
 import { useState, useEffect } from 'react';
-
+import SelectCardScreen from './screens/Select_card.js'
 
 export default function App() {
   const [player, setPlayer] = useState('');
@@ -18,6 +18,7 @@ export default function App() {
   
     return (
       <div className="App">
+        {/* <SelectCardScreen player_Data={player.cardList}></SelectCardScreen> */}
         <MainScreen opponent_Data={opponent_Data} player_Data={player_Data}></MainScreen>
         
       </div>
