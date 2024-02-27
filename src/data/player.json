@@ -1,10 +1,10 @@
 {
-    "username": "player",
+    "username": "Player",
     "level": 1,
     "points": 0,
     "cardList": [
         {
-            "creature": "wolpertinger",
+            "creature": "Wolpertinger",
             "level": 1,
             "healthpoints": 30,
             "weaponskill": 8,
@@ -15,7 +15,7 @@
             "speed": 9
         },
         {
-            "creature": "troll",
+            "creature": "Troll",
             "level": 1,
             "healthpoints": 50,
             "weaponskill": 2,

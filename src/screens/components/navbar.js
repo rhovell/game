@@ -1,10 +1,10 @@
 import '../styles/Navbar.css';
 
-function NavBar({ runTurn }) {
+function NavBar({ runTurn, playersTurn }) {
     return (
-        <div className="controls">
-            <div className="attack">
-                <button onClick={runTurn}>Run Test</button>
+        <div className="controls" style={{justifyContent: playersTurn === true ? 'flex-start' : 'flex-end'}}>
+            <div className="attack" >
+                <button onClick={runTurn}>Attack!</button>
             </div>
         </div>
     );

@@ -11,12 +11,11 @@ export default function PlayerScreen({player}) {
  
     return (
         <div>
+            <h2 className="username">{player.username}</h2>
             <div className="player-level">Level: {player.level}</div>
-            <div className="username">{player.username}</div>
-            <div className="points">Points: {player.points}</div>
-            <div className="card-area">
-                <div className="card-title">{selectedCard.creature}</div>
-                <div className="health">Health: {selectedCard.healthpoints}</div>
+            <div className="card-area" >
+                <h3 className="card-title">{selectedCard.creature}</h3>
+                <div className="health" data={selectedCard.healthpoints > 0 ? selectedCard.healthpoints : 'dead'}>Health: {selectedCard.healthpoints > 0 ? selectedCard.healthpoints : 0}</div>
                 <div className="weaponskill">Weapon Skill: {selectedCard.weaponskill}</div>
                 <div className="strength">Strength: {selectedCard.strength}</div>
                 <div className="toughness">Toughness: {selectedCard.toughness}</div>
