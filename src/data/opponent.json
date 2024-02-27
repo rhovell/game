@@ -4,15 +4,15 @@
     "points": 0,
     "cardList": [
         {
-            "creature": "wolpertinger",
+            "creature": "zombie",
             "level": 1,
-            "healthpoints": 30,
-            "weaponskill": 8,
-            "strength": 3,
-            "toughness": 4,
+            "healthpoints": 70,
+            "weaponskill": 3,
+            "strength": 4,
+            "toughness": 8,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 9
+            "speed": 2
         },
         {
             "creature": "troll",
@@ -26,10 +26,22 @@
             "speed": 3
         },
         {
+            "creature": "wolpertinger",
+            "level": 1,
+            "healthpoints": 30,
+            "weaponskill": 6,
+            "strength": 3,
+            "toughness": 4,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 9
+        },
+
+        {
             "creature": "zombie",
             "level": 1,
-            "healthpoints": 40,
-            "weaponskill": 2,
+            "healthpoints": 70,
+            "weaponskill": 3,
             "strength": 4,
             "toughness": 8,
             "manapoints": 0,
