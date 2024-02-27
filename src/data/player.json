@@ -26,6 +26,17 @@
             "speed": 3
         },
         {
+            "creature": "wolpertinger",
+            "level": 1,
+            "healthpoints": 30,
+            "weaponskill": 8,
+            "strength": 3,
+            "toughness": 4,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 9
+        },
+        {
             "creature": "zombie",
             "level": 1,
             "healthpoints": 70,
