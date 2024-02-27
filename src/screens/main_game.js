@@ -53,7 +53,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
 
         }
 
-    })
+    }, [setWinner, player_Data, opponent_Data])
 
     const switchPlayer = useCallback(() => {
         
@@ -67,7 +67,6 @@ export default function MainScreen({player_Data, opponent_Data}) {
             attacker = player_Data;
             defender = opponent_Data;
             setPlayersTurn(true)
-
         }
 
         if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
@@ -76,7 +75,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
             endGame()
         }
         
-    }, [playersTurn, setPlayersTurn, endGame])
+    }, [playersTurn, setPlayersTurn, endGame, player_Data, opponent_Data])
 
 
     const runTurn = useCallback((attacker, defender) => {
@@ -111,7 +110,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
         }
         function miss() {
             console.warn(attacker.creature, 'missed!');
-            tryAgain()
+            tryAgain(attacker, defender)
         }
         function hit() {
             console.warn(attacker.creature, 'Hit!');
@@ -130,19 +129,19 @@ export default function MainScreen({player_Data, opponent_Data}) {
 
         function parried() {
             console.warn(defender.creature, 'parried!');
-            tryAgain()
+            tryAgain(attacker, defender)
         }
         function connected() {
             console.warn(attacker.creature, 'connected!');
             calculateDamage()
             setTimeout(() => {
-                tryAgain()
+                tryAgain(attacker, defender)
 
             },50)
         }
 
         function calculateDamage(){
-            let damageDealt = Math.round((attacker.weaponskill * attacker.strength) * (attacker.strength / defender.toughness))
+            let damageDealt = Math.round(((attacker.weaponskill * attacker.strength) * (attacker.strength / defender.toughness)) /2)
             console.warn(attacker.creature, 'dealt', damageDealt, 'damage to', defender.creature);
             // console.warn('damage calc', attacker.weaponskill, attacker.strength, attacker.strength, defender.toughness);
 
@@ -156,42 +155,49 @@ export default function MainScreen({player_Data, opponent_Data}) {
             }
             console.warn(defender.creature, 'healthpoints', defender.healthpoints);
             // console.warn(attacker.creature, 'healthpoints', attacker.healthpoints);
+            if(defender.healthpoints <= 0 ){
+                endGame()
+            }
         }
         
-        function tryAgain() {
-            let playerCard = player_Data.cardList[0];
-            let opponentCard = opponent_Data.cardList[1];
-            let player_speed = playerCard.speed;
-            let opponent_speed = opponentCard.speed;
-            let newFastest = Math.max(player_speed, opponent_speed)
-            if (newFastest === player_speed) {
-                if(playerCard.healthpoints > 0 && opponentCard.healthpoints > 0){
+        function tryAgain(attacker, defender) {
+            // let playerCard = player_Data.cardList[0];
+            // let opponentCard = opponent_Data.cardList[1];
+            // let player_speed = playerCard.speed;
+            // let opponent_speed = opponentCard.speed;
+            let newFastest = Math.max(attacker.speed, defender.speed)
+            if (newFastest === attacker.speed) {
+                if(attacker.healthpoints > 0 && defender.healthpoints > 0){
                     var random = Math.random() * 100;
-                    let chanceOfAttack = (player_speed / defender.speed) * 5;
-                    console.warn('chance of second attack', chanceOfAttack);
+                    let chanceOfAttack = ((attacker.speed * attacker.weaponskill) / (defender.weaponskill * defender.speed)) * 5;
                     if (random > 0 && random < chanceOfAttack) {
+                        console.warn('chance of second attack', chanceOfAttack);
                         secondhit()
                     } else if (random >= chanceOfAttack && random < 100) {
                         secondmiss()
                     }
-                } else if(playerCard.healthpoints <= 0 || opponentCard.healthpoints <= 0){
+                } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
                     endGame()
                 }
+            } else {
+                switchPlayer()
             }
+
             function secondmiss() {
-                console.warn('second attack missed, next turn');
-                if (playerCard.healthpoints > 0 && opponentCard.healthpoints > 0) {
+                console.warn('second attack missed, next turn/end game');
+                if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
                     switchPlayer()
-                } else if(playerCard.healthpoints <= 0 || opponentCard.healthpoints <= 0){
+                } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
                     endGame()
                 }
             }
+
             function secondhit() {
                 console.warn('second attack hit!');
                 calculateDamage()
-                if (playerCard.healthpoints > 0 && opponentCard.healthpoints > 0) {
+                if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
                     switchPlayer()
-                } else if(playerCard.healthpoints <= 0 || opponentCard.healthpoints <= 0){
+                } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
                     endGame()
                 }
             }
@@ -214,7 +220,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
                     </div>
                 </div>
             </div>
-            <h3 className='winner' winner={winner != '' ? "true" : "false" }>{winner ? winner + ' Wins!' : ''}</h3>
+            <h3 className='winner' winner={winner !== '' ? "true" : "false" }>{winner ? winner + ' Wins!' : ''}</h3>
             <NavBar playersTurn={playersTurn} runTurn={(attacker, defender) => runTurn(attacker, defender)}></NavBar>
         </main>
     );
