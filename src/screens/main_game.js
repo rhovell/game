@@ -1,13 +1,14 @@
 import './styles/MainScreen.css';
 import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
-// import opponent_Data from '../data/opponent.json';
-// import player_Data from '../data/player.json';
+// import opponent from '../data/opponent.json';
+// import player from '../data/player.json';
 import PlayerScreen from './PlayerScreen.js'
 import NavBar from './components/navbar.js';
 
-export default function MainScreen({player_Data, opponent_Data}) {
 
+export default function MainScreen({playerCard, opponent, player}) {
+// console.warn('playerCard', playerCard);
     const [round, setRound] = useState(0);
     const [playersTurn, setPlayersTurn] = useState(true);
     const [winner, setWinner] = useState('');
@@ -15,57 +16,59 @@ export default function MainScreen({player_Data, opponent_Data}) {
     
     const checkFastest = useCallback(() => {
         // console.warn('check fastest');
-        let playerInfo = player_Data;
-        let opponentInfo = opponent_Data;
-        let playerCard = playerInfo.cardList[0];
+        // let playerInfo = player;
+        let opponentInfo = opponent;
+        // let playerCard = playerInfo.cardList[0];
         // console.warn('playerCard',playerCard);
-        let player_speed = playerCard.speed;
+        let player_speed = playerCard[0].speed;
         let opponentCard = opponentInfo.cardList[0];
         // console.warn('opponentCard',opponentCard);
         let opponent_speed = opponentCard.speed;
         let fastest = Math.max(player_speed, opponent_speed)
         if (fastest === player_speed) {
+            console.warn(player.username, 'goes first');
             setPlayersTurn(true)
         } else {
+            console.warn(opponent.username, 'goes first');
             setPlayersTurn(false)
         }
-    }, [setPlayersTurn, player_Data, opponent_Data])
+    }, [setPlayersTurn, player, opponent])
 
     useEffect(() => {
         checkFastest()
-    }, [player_Data, checkFastest]);
+    }, [player, checkFastest]);
     
     const endGame = useCallback(() => {
         console.warn('end game!');
-        let playerInfo = player_Data;
-        let opponentInfo = opponent_Data;
-        let playerCard = playerInfo.cardList[0];
+        let playerInfo = player;
+        let opponentInfo = opponent;
+        // let playerCard = playerC;
         // console.warn('playerCard',playerCard);
-        let player_health = playerCard.healthpoints;
+        let player_health = playerCard[0].healthpoints;
         let opponentCard = opponentInfo.cardList[0];
         let opponent_health = opponentCard.healthpoints;
         if(player_health <= 0){
             console.warn(opponentCard.creature, 'wins!');
             setWinner(opponentCard.creature)
         } else if(opponent_health <= 0){
-            console.warn(playerCard.creature, 'wins!');
-            setWinner(playerCard.creature)
+            console.warn(playerCard[0].creature, 'wins!');
+            setWinner(playerCard[0].creature)
 
         }
 
-    }, [setWinner, player_Data, opponent_Data])
+    }, [setWinner, player, opponent])
 
     const switchPlayer = useCallback(() => {
         
         setRound(round => round + 1)
         let attacker, defender;
         if (playersTurn === true) {
-            attacker = opponent_Data;
-            defender = player_Data;
+            attacker = opponent;
+            defender = player;
             setPlayersTurn(false)
         } else {
-            attacker = player_Data;
-            defender = opponent_Data;
+            attacker = player;
+            defender = opponent;
             setPlayersTurn(true)
         }
 
@@ -75,7 +78,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
             endGame()
         }
         
-    }, [playersTurn, setPlayersTurn, endGame, player_Data, opponent_Data])
+    }, [playersTurn, setPlayersTurn, endGame, player, opponent])
 
 
     const runTurn = useCallback((attacker, defender) => {
@@ -83,11 +86,11 @@ export default function MainScreen({player_Data, opponent_Data}) {
         console.warn('round',round);
         // let attacker, defender;
         if(playersTurn === true){
-            attacker = player_Data.cardList[0];
-            defender = opponent_Data.cardList[0];
+            attacker = playerCard[0];
+            defender = opponent.cardList[0];
         } else if(playersTurn === false){
-            attacker = opponent_Data.cardList[0];
-            defender = player_Data.cardList[0];
+            attacker = opponent.cardList[0];
+            defender = playerCard[0];
         }
         var random = Math.random() * 100;
         console.warn('attacker is', attacker.creature, '- healthpoints: ', attacker.healthpoints);
@@ -148,10 +151,10 @@ export default function MainScreen({player_Data, opponent_Data}) {
             let newHealth = defender.healthpoints - damageDealt;
             defender.healthpoints = newHealth;
             
-            if (opponent_Data.creature === defender.creature) {
-                opponent_Data.healthpoints = newHealth;
-            } else if (player_Data.creature === defender.creature) {
-                player_Data.healthpoints = newHealth;
+            if (opponent.creature === defender.creature) {
+                opponent.healthpoints = newHealth;
+            } else if (player.creature === defender.creature) {
+                player.healthpoints = newHealth;
             }
             console.warn(defender.creature, 'healthpoints', defender.healthpoints);
             // console.warn(attacker.creature, 'healthpoints', attacker.healthpoints);
@@ -161,17 +164,17 @@ export default function MainScreen({player_Data, opponent_Data}) {
         }
         
         function tryAgain(attacker, defender) {
-            // let playerCard = player_Data.cardList[0];
-            // let opponentCard = opponent_Data.cardList[1];
-            // let player_speed = playerCard.speed;
+            // let playerCard = player.cardList[0];
+            // let opponentCard = opponent.cardList[1];
+            // let player_speed = playerCard[0].speed;
             // let opponent_speed = opponentCard.speed;
             let newFastest = Math.max(attacker.speed, defender.speed)
             if (newFastest === attacker.speed) {
                 if(attacker.healthpoints > 0 && defender.healthpoints > 0){
                     var random = Math.random() * 100;
                     let chanceOfAttack = ((attacker.speed * attacker.weaponskill) / (defender.weaponskill * defender.speed)) * 5;
+                    console.warn('chance of second attack', chanceOfAttack);
                     if (random > 0 && random < chanceOfAttack) {
-                        console.warn('chance of second attack', chanceOfAttack);
                         secondhit()
                     } else if (random >= chanceOfAttack && random < 100) {
                         secondmiss()
@@ -184,7 +187,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
             }
 
             function secondmiss() {
-                console.warn('second attack missed, next turn/end game');
+                console.warn('Second attack missed');
                 if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
                     switchPlayer()
                 } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
@@ -193,7 +196,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
             }
 
             function secondhit() {
-                console.warn('second attack hit!');
+                console.warn('second attack was successful!');
                 calculateDamage()
                 if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
                     switchPlayer()
@@ -203,7 +206,7 @@ export default function MainScreen({player_Data, opponent_Data}) {
             }
         }
     
-    }, [playersTurn, round, endGame, opponent_Data, player_Data, switchPlayer])
+    }, [playersTurn, round, endGame, opponent, player, switchPlayer])
 
     return (
         <main className="main">
@@ -211,12 +214,12 @@ export default function MainScreen({player_Data, opponent_Data}) {
             <div className="main-game-area">
                 <div className="player screen_half">
                     <div className="player-screen">
-                        <PlayerScreen player={player_Data}></PlayerScreen>
+                        <PlayerScreen player={playerCard[0]}></PlayerScreen>
                     </div>
                 </div>
                 <div className="computer screen_half">
                     <div className="player-screen">
-                        <PlayerScreen player={opponent_Data}></PlayerScreen>
+                        <PlayerScreen player={opponent.cardList[0]}></PlayerScreen>
                     </div>
                 </div>
             </div>
