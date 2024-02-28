@@ -1,18 +1,25 @@
 import React from 'react';
 import { useState, useEffect }  from 'react';
 
-export default function PlayerScreen({player}) {
+export default function PlayerScreen({ playerInfo, playerCard }) {
 // console.warn(player);
     const [selectedCard, setSelectedCard] = useState('')
+    const [player, setPlayer] = useState('')
+
 
     useEffect(() => {
-        setSelectedCard(player)
-    }, [player]);
+        setSelectedCard(playerCard)
+        setPlayer(playerInfo)
+    }, [player, setPlayer, selectedCard, setSelectedCard, playerInfo, playerCard]);
  
     return (
         <div>
-            <h2 className="username">{player.username}</h2>
-            <div className="player-level">Level: {player.level}</div>
+            <div className='player-details'>
+                <h2 className="username">{player.username}</h2>
+                <div className="player-level">Level: {player.level}</div>
+                {player.experiencepoints ? <div className="player-exp">Exp: {player.experiencepoints}</div> : <></>}
+                
+            </div>
             <div className="card-area" >
                 <h3 className="card-title">{selectedCard.creature}</h3>
                 <div className="health" data={selectedCard.healthpoints > 0 ? selectedCard.healthpoints : 'dead'}>Health: {selectedCard.healthpoints > 0 ? selectedCard.healthpoints : 0}</div>

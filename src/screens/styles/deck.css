@@ -13,7 +13,8 @@ ul.card-list {
     justify-content: space-around;
     margin: 0;
     padding: 0;
-
+    flex-wrap: wrap;
+    row-gap: 10px;
 }
 
 li.card {

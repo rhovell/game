@@ -18,9 +18,9 @@
             "creature": "troll",
             "level": 1,
             "healthpoints": 45,
-            "weaponskill": 2,
-            "strength": 5,
-            "toughness": 6,
+            "weaponskill": 3,
+            "strength": 6,
+            "toughness": 7,
             "manapoints": 0,
             "magicresistance": 0,
             "speed": 3
@@ -29,27 +29,37 @@
             "creature": "wolpertinger",
             "level": 1,
             "healthpoints": 30,
-            "weaponskill": 6,
+            "weaponskill": 8,
             "strength": 3,
             "toughness": 4,
             "manapoints": 0,
             "magicresistance": 0,
             "speed": 9
         },
-
-        {
-            "creature": "zombie",
-            "level": 1,
-            "healthpoints": 70,
-            "weaponskill": 3,
-            "strength": 4,
-            "toughness": 8,
-            "manapoints": 0,
-            "magicresistance": 0,
-            "speed": 2
-        },
         {
             "creature": "goblin",
+            "level": 1,
+            "healthpoints": 40,
+            "weaponskill": 4,
+            "strength": 5,
+            "toughness": 5,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 4
+        },
+        {
+            "creature": "elf",
+            "level": 1,
+            "healthpoints": 35,
+            "weaponskill": 6,
+            "strength": 5,
+            "toughness": 3,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 5
+        },
+        {
+            "creature": "banana",
             "level": 1,
             "healthpoints": 35,
             "weaponskill": 4,

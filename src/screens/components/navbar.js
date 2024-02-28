@@ -5,6 +5,8 @@ function NavBar({ runTurn, playersTurn }) {
         <div className="controls" style={{justifyContent: playersTurn === true ? 'flex-start' : 'flex-end'}}>
             <div className="attack" >
                 <button onClick={runTurn}>Attack!</button>
+                {/* <button onClick={runTurn}>Run Whole Match</button> */}
+
             </div>
         </div>
     );

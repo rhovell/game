@@ -8,7 +8,7 @@ export default function SelectCardScreen({ deckList, selectCard }) {
 
    
         // setDeck(deckList)
-        let deckItems = deckList.map((card) =>
+        let deckItems = deck.map((card) =>
             <li key={card.creature} className='card' id={card.creature} onClick={(event) => selectCard(event)}>
                 {card.creature}
             </li>

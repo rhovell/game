@@ -2,25 +2,15 @@
     "username": "Player",
     "level": 1,
     "points": 0,
+    "experiencepoints": 0,
     "cardList": [
-        {
-            "creature": "goblin",
-            "level": 1,
-            "healthpoints": 35,
-            "weaponskill": 4,
-            "strength": 4,
-            "toughness": 5,
-            "manapoints": 0,
-            "magicresistance": 0,
-            "speed": 5
-        },
         {
             "creature": "troll",
             "level": 1,
             "healthpoints": 45,
-            "weaponskill": 2,
-            "strength": 6,
-            "toughness": 6,
+            "weaponskill": 3,
+            "strength": 7,
+            "toughness": 8,
             "manapoints": 0,
             "magicresistance": 0,
             "speed": 3
@@ -50,13 +40,35 @@
         {
             "creature": "goblin",
             "level": 1,
-            "healthpoints": 35,
+            "healthpoints": 40,
             "weaponskill": 4,
-            "strength": 4,
+            "strength": 5,
             "toughness": 5,
             "manapoints": 0,
             "magicresistance": 0,
+            "speed": 4
+        },
+        {
+            "creature": "elf",
+            "level": 1,
+            "healthpoints": 35,
+            "weaponskill": 6,
+            "strength": 5,
+            "toughness": 3,
+            "manapoints": 0,
+            "magicresistance": 0,
             "speed": 5
+        },
+        {
+            "creature": "banana",
+            "level": 1,
+            "healthpoints": 105,
+            "weaponskill": 0,
+            "strength": 42,
+            "toughness": 50,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 0
         }
     ]
 }
