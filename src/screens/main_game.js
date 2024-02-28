@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 // import opponent from '../data/opponent.json';
 // import player from '../data/player.json';
 import PlayerScreen from './PlayerScreen.js'
-import NavBar from './components/navbar.js';
 
 
 export default function MainScreen({ playerCard, opponentCard, opponent, player}) {
@@ -14,7 +13,7 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     const [round, setRound] = useState(0);
     const [playersTurn, setPlayersTurn] = useState(true);
     const [winner, setWinner] = useState('');
-
+    const [automated, setAutomated] = useState('');
     
     const checkFastest = useCallback(() => {
         let player_speed = playerCard[0].speed;
@@ -32,21 +31,28 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     useEffect(() => {
         checkFastest()
     }, [player, checkFastest]);
+
+
     
     const endGame = useCallback(() => {
         console.warn('end game!');
         let player_health = playerCard[0].healthpoints;
         let opponent_health = opponentCard[0].healthpoints;
+        let winnerName;
         if(player_health <= 0){
             console.warn(opponentCard[0].creature, 'wins!');
             setWinner(opponentCard[0].creature)
+            winnerName = opponentCard[0].creature
         } else if(opponent_health <= 0){
             console.warn(playerCard[0].creature, 'wins!');
             setWinner(playerCard[0].creature)
-
+            winnerName = playerCard[0].creature
         }
-
-    }, [setWinner, opponentCard, playerCard])
+        setAutomated(false)
+        return winnerName
+        
+        // setAutomated(false)
+    }, [setWinner, opponentCard, playerCard, setAutomated])
 
     const switchPlayer = useCallback(() => {
         
@@ -70,7 +76,9 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         
     }, [playersTurn, setPlayersTurn, endGame, player, opponent])
 
-    const runTurn = useCallback((attacker, defender) => {
+ 
+
+    const runTurn = useCallback((attacker, defender, auto = false) => {
         setRound((round) => round+1)
         console.warn('round',round);
         // let attacker, defender;
@@ -84,7 +92,7 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         var random = Math.random() * 100;
         console.warn('attacker is', attacker.creature, '- healthpoints: ', attacker.healthpoints);
         console.warn('defender is', defender.creature, '- healthpoints: ', defender.healthpoints);
-        // console.warn('is it players turn?', playersTurn);
+
         // callstack 
         calculateMiss()
         
@@ -189,24 +197,54 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     
     }, [playersTurn, round, endGame, opponent, player, switchPlayer, opponentCard, playerCard])
 
+    const element = React.useRef(null)
+
+    function setAuto(){
+        console.warn('setauto');
+        element.current.click()
+        setAutomated(true)
+    }
+
+    useEffect(() => {
+        if(automated === true){
+            if(winner == ""){
+                const interval = setInterval(() => {
+                    element.current.click()
+                  }, 2500);
+                  return () => clearInterval(interval);
+            }
+        }
+    }, [automated, setAutomated])
+
     return (
-        <main className="main">
-                <h2 className="round">Round {round === 0 ? 1 : Math.round(round/2)}</h2>
-            <div className="main-game-area">
-                <div className="player screen_half">
-                    <div className="player-screen">
-                        <PlayerScreen playerInfo={player} playerCard={playerCard[0]}></PlayerScreen>
+        <>
+            <main className="main">
+                    <h2 className="round">Round {round === 0 ? 1 : Math.round(round/2)}</h2>
+                <div className="main-game-area">
+                    <div className="player screen_half">
+                        <div className="player-screen">
+                            <PlayerScreen playerInfo={player} playerCard={playerCard[0]}></PlayerScreen>
+                        </div>
+                    </div>
+                    <div className="computer screen_half">
+                        <div className="player-screen">
+                            <PlayerScreen playerInfo={opponent} playerCard={opponentCard[0]}></PlayerScreen>
+                        </div>
                     </div>
                 </div>
-                <div className="computer screen_half">
-                    <div className="player-screen">
-                        <PlayerScreen playerInfo={opponent} playerCard={opponentCard[0]}></PlayerScreen>
+                <h3 className='winner' winner={winner !== '' ? "true" : "false" }>{winner ? winner + ' Wins!' : ''}</h3>
+            </main>
+            <nav>
+                <div className='automate-button'>
+                    <button id="automate" onClick={setAuto}>Run Whole Match</button>
+                </div>
+                <div className="controls" style={{justifyContent: playersTurn === true ? 'flex-start' : 'flex-end'}}>
+                    <div className="attack" >
+                        <button id="attack" ref={element} onClick={runTurn}>Attack!</button>
                     </div>
                 </div>
-            </div>
-            <h3 className='winner' winner={winner !== '' ? "true" : "false" }>{winner ? winner + ' Wins!' : ''}</h3>
-            <NavBar playersTurn={playersTurn} runTurn={(attacker, defender) => runTurn(attacker, defender)}></NavBar>
-        </main>
+            </nav>
+        </>
     );
 }
 
