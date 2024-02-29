@@ -5,18 +5,7 @@
     "experiencepoints": 0,
     "cardList": [
         {
-            "creature": "troll",
-            "level": 1,
-            "healthpoints": 45,
-            "weaponskill": 3,
-            "strength": 7,
-            "toughness": 8,
-            "manapoints": 0,
-            "magicresistance": 0,
-            "speed": 3
-        },
-        {
-            "creature": "wolpertinger",
+            "creature": "Wolpertinger",
             "level": 1,
             "healthpoints": 30,
             "weaponskill": 8,
@@ -24,10 +13,23 @@
             "toughness": 4,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 9
+            "speed": 9,
+            "attacks": ["claw", "bite", "slash"," gnaw"]
         },
         {
-            "creature": "zombie",
+            "creature": "Troll",
+            "level": 1,
+            "healthpoints": 45,
+            "weaponskill": 2,
+            "strength": 6,
+            "toughness": 6,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 3,
+            "attacks": ["hammer", "bash", "stomp", "gawp"]
+        },
+        {
+            "creature": "Zombie",
             "level": 1,
             "healthpoints": 70,
             "weaponskill": 3,
@@ -35,40 +37,32 @@
             "toughness": 8,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 2
+            "speed": 2,
+            "attacks": ["stumble", "claw", "bite", "gnaw"]
         },
         {
-            "creature": "goblin",
+            "creature": "Goblin",
             "level": 1,
             "healthpoints": 40,
-            "weaponskill": 4,
+            "weaponskill": 5,
             "strength": 5,
             "toughness": 5,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 4
+            "speed": 4,
+            "attacks": ["shank", "claw", "punch", "batter"]
         },
         {
-            "creature": "elf",
+            "creature": "Elf",
             "level": 1,
             "healthpoints": 35,
-            "weaponskill": 6,
+            "weaponskill": 7,
             "strength": 5,
             "toughness": 3,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 5
-        },
-        {
-            "creature": "banana",
-            "level": 1,
-            "healthpoints": 105,
-            "weaponskill": 0,
-            "strength": 42,
-            "toughness": 50,
-            "manapoints": 0,
-            "magicresistance": 0,
-            "speed": 0
+            "speed": 5,
+            "attacks": ["shoot", "glamour", "slash"]
         }
     ]
 }

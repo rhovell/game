@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect }  from 'react';
+import AttackButton from './components/AttackButton'
 
-export default function PlayerScreen({ playerInfo, playerCard }) {
+export default function PlayerScreen({ playerInfo, playerCard, runTurn }) {
 // console.warn(player);
     const [selectedCard, setSelectedCard] = useState('')
     const [player, setPlayer] = useState('')
@@ -29,6 +30,11 @@ export default function PlayerScreen({ playerInfo, playerCard }) {
                 <div className="manapoints">Mana points: {selectedCard.manapoints}</div>
                 <div className="magicresistance">Magic Resistance: {selectedCard.magicresistance}</div>
                 <div className="speed">Speed: {selectedCard.speed}</div>
+            </div>
+            <div className='attacks'>
+                {/* {selectedCard.attacks.map((attack, i) =>
+                <AttackButton key={player.username+'_attack_'+i+'_'+attack} attack={attack} onClick={runTurn}>{attack}</AttackButton>
+                )} */}
             </div>
         </div>
     );
