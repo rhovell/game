@@ -1,6 +1,6 @@
 # Game Flow
 
-First attacker is decided by who is fastest - this decides the UI 
+First attacker decision runs when playerCard/opponentCard props are loaded - attacker is decided by who is fastest - this decides the UI 
 
 ## Standard Attack
 
@@ -30,7 +30,8 @@ If the attack landed, then calculate the chance of the defender parrying the att
 
     The attacker then has another chance of attacking.
 
-If the first attack missed, the attacker has another chance of attacking.
+If the first attack missed (or is parried), the attacker has another chance of attacking.
+`tryAgain()`
 
 The attackers second attack runs through the above journey again, but if parried, the round is over.
 

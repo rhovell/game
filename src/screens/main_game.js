@@ -10,15 +10,20 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
 // console.warn('playerCard', playerCard);
 //     console.warn('opponentCard', opponentCard);
 
-    const [round, setRound] = useState(0);
+    const [round, setRound] = useState(1);
     const [playersTurn, setPlayersTurn] = useState(true);
     const [winner, setWinner] = useState('');
-    const [automated, setAutomated] = useState('');
-    const [turn, setTurn] = useState(0);
+    const [automated, setAutomated] = useState(false);
+    const [turn, setTurn] = useState(1);
     const [attacker, setAttacker] = useState('');
     const [defender, setDefender] = useState('');
     
+    // const [isAttack, setIsAttack] = useState(false);
+
+
+    
     useState(() => {
+        // console.warn('useState');
         let player_speed = playerCard[0].speed;
         let opponent_speed = opponentCard[0].speed;
         let fastest = Math.max(player_speed, opponent_speed)
@@ -26,38 +31,33 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
             setPlayersTurn(true)
             setAttacker(playerCard[0])
             setDefender(opponentCard[0])
-
+            
+        console.warn('attacker is', playerCard[0].creature, '- healthpoints: ', playerCard[0].healthpoints);
+        console.warn('defender is', opponentCard[0].creature, '- healthpoints: ', opponentCard[0].healthpoints);
         } else {
             setPlayersTurn(false)
             setDefender(playerCard[0])
             setAttacker(opponentCard[0])
-
+            
+        console.warn('attacker is', playerCard[0].creature, '- healthpoints: ', playerCard[0].healthpoints);
+        console.warn('defender is', opponentCard[0].creature, '- healthpoints: ', opponentCard[0].healthpoints);
         }
     }, [setPlayersTurn, playerCard, opponentCard, setAttacker, setDefender])
-
-    // useEffect(() => {
-    //     console.warn('turn change', turn);
-    //     if(turn % 2 === 0){
-    //         setRound(round => round + 1)
-    //         console.warn('round change', round);
-    //     }
-    // }, [turn, setRound]);
-
 
     
     const endGame = useCallback(() => {
         console.warn('end game!');
-        let player_health = playerCard[0].healthpoints;
-        let opponent_health = opponentCard[0].healthpoints;
+        // let player_health = attacker.healthpoints;
+        // let opponent_health = defender.healthpoints;
         let winnerName;
-        if(player_health <= 0){
-            console.warn(opponentCard[0].creature, 'wins!');
-            setWinner(opponentCard[0].creature)
-            winnerName = opponentCard[0].creature
-        } else if(opponent_health <= 0){
-            console.warn(playerCard[0].creature, 'wins!');
-            setWinner(playerCard[0].creature)
-            winnerName = playerCard[0].creature
+        if(attacker.healthpoints <= 0){
+            console.warn(attacker.creature, 'wins!');
+            setWinner(attacker)
+            winnerName = attacker.creature
+        } else if(defender.healthpoints <= 0){
+            console.warn(defender.creature, 'wins!');
+            setWinner(defender.creature)
+            winnerName = defender.creature
         }
         setAutomated(false)
         return winnerName
@@ -67,83 +67,55 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
 
     const switchPlayer = useCallback(() => {
         
-        setRound(round => round + 1)
-        
-        console.warn('turn', turn, 'round', round);
-        let attacker, defender;
+        console.warn('*********** switchPlayer ******************');
+        console.warn(`*********** end turn ${turn} ******************`);
+
+        setTurn(turn => turn + 1)
+        if(turn % 2 === 0){
+            // even turns
+            setRound(round => round + 1)
+        }
+        console.warn('end round', round, 'turn', turn);
         if (playersTurn === false) {
             setPlayersTurn(true)
             setAttacker(playerCard[0])
             setDefender(opponentCard[0])
-
         } else {
             setPlayersTurn(false)
             setDefender(playerCard[0])
             setAttacker(opponentCard[0])
-
         }
 
         if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
-            console.warn('attacker', attacker.creature);
-            console.warn('defender', defender.creature);
-            runTurn(attacker, defender)
+            if(automated === true){
+                runTurn(attacker, defender)
+            }
         } else if (attacker.healthpoints <= 0 || defender.healthpoints <= 0) {
             endGame()
         }
+
         
-    }, [playersTurn, setPlayersTurn, endGame, player, opponent])
+    }, [playersTurn, setPlayersTurn, endGame, player, opponent, turn, round, attacker, defender, automated, opponentCard, playerCard, playersTurn])
 
- 
-    const checkFastest = useCallback(() => {
-        let player_speed = playerCard[0].speed;
-        let opponent_speed = opponentCard[0].speed;
-        let fastest = Math.max(player_speed, opponent_speed)
-        if (fastest === player_speed) {
-            setPlayersTurn(true)
-            setAttacker(playerCard[0])
-            setDefender(opponentCard[0])
-
+   // If the first attack missed, the attacker has another chance of attacking.
+   const miss = useCallback((attackNumber) => {
+        console.warn(attacker.creature, attackNumber, ' attack missed!');
+        if(attackNumber === 1){
+            // If the first attack missed, the attacker has another chance of attacking.
+            tryAgain(attacker, defender)
         } else {
-            setPlayersTurn(false)
-            setDefender(playerCard[0])
-            setAttacker(opponentCard[0])
-
-        }
-        return fastest;
-    })
-
-    const runTurn = useCallback(() => {
-        setTurn(turn => turn + 1)
-        console.warn('turn', turn);
-        let player_speed = playerCard[0].speed;
-        let opponent_speed = opponentCard[0].speed;
-        let fastest = Math.max(player_speed, opponent_speed)
-        // let attacker, defender;
-        if(turn % 2 === 0){
-            if (fastest === player_speed) {
-                console.warn(player.username, 'goes first');
-                // attacker = playerCard[0];
-                // defender = opponentCard[0];
-            } else {
-                console.warn(opponent.username, 'goes first');
-                // attacker = opponentCard[0];
-                // defender = playerCard[0];
+            if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
+                switchPlayer()
+            } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
+                endGame()
             }
         }
-        
-        console.warn('attacker is', attacker.creature, '- healthpoints: ', attacker.healthpoints);
-        console.warn('defender is', defender.creature, '- healthpoints: ', defender.healthpoints);
-        
-        calculateMiss(1)
-
-    
-    })
-
+    }, [attacker, defender, switchPlayer, endGame, tryAgain])
             
     // Calculate the chance that the attacker will miss their attack
-    function calculateMiss(attackNumber){
+    const calculateMiss = useCallback((attackNumber) => {
         let missChance = 1 * ((defender.speed * defender.weaponskill) / (attacker.speed * attacker.weaponskill))
-        console.warn(attacker.creature, missChance, 'chance of miss on attack number ', attackNumber) ;
+        console.warn(attacker.creature, 'has', missChance, '% chance of miss on attack number ', attackNumber) ;
         // Dependant on their chances, run hit or miss:
         var random = Math.random() * 100;
         if (random > 0 && random < missChance) {
@@ -152,23 +124,16 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
             hit(attackNumber)
         }
 
-    }
+    }, [attacker, defender, hit, miss])
 
-    // If the first attack missed, the attacker has another chance of attacking.
-    function miss(attackNumber) {
-        console.warn(attacker.creature, attackNumber, ' attack missed!');
-        if(attackNumber === 1){
-            // If the first attack missed, the attacker has another chance of attacking.
-            tryAgain(attacker, defender)
-        } else {
-            console.warn('Second attack missed');
-            if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
-                switchPlayer()
-            } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
-                endGame()
-            }
-        }
-    }
+    
+    const runTurn = useCallback(() => {
+        
+        console.warn('**************** New Turn ***********');        
+        calculateMiss(1)
+    }, [calculateMiss])
+
+ 
     // If the attack landed
     function hit(attackNumber) {
         console.warn(attacker.creature, attackNumber, 'attack Hit!');
@@ -200,12 +165,6 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     function connected(attackNumber) {
         console.warn(attacker.creature, attackNumber, 'hit connected!');
         calculateDamage(attackNumber)
-        if(attackNumber === 1){
-            setTimeout(() => {
-                // The attacker then has another chance of attacking.
-                tryAgain(attacker, defender)
-            },50)
-        }
     }
 
     function calculateDamage(attackNumber){
@@ -223,36 +182,34 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         if(defender.healthpoints <= 0 ){
             endGame()
         } else if(attackNumber === 1){
+            tryAgain(attacker, defender)
+        } else if(attackNumber === 2){
             switchPlayer()
         }
     }
     
     function tryAgain(attacker, defender) {
-        let newFastest = Math.max(attacker.speed, defender.speed)
-        if (newFastest === attacker.speed) {
+        console.warn(attacker.creature, 'tries again');
+        if(attacker.healthpoints > 0 && defender.healthpoints > 0){
             if(attacker.healthpoints > 0 && defender.healthpoints > 0){
                 calculateMiss(2)
-            } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
-                endGame()
-            }
-        } else {
-            switchPlayer()
+            } 
+        } else if(attacker.healthpoints <= 0 || defender.healthpoints <= 0){
+            endGame()
         }
-
-
     }
 
     const element = React.useRef(null)
 
     function setAuto(){
-        console.warn('setauto');
+        // console.warn('setauto');
         element.current.click()
         setAutomated(true)
     }
 
     useEffect(() => {
         if(automated === true){
-            if(winner == ""){
+            if(winner === ""){
                 const interval = setInterval(() => {
                     element.current.click()
                   }, 2500);
@@ -264,16 +221,16 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     return (
         <>
             <main className="main">
-                    <h2 className="round">Round {round === 0 ? 1 : Math.round(round/2)}</h2>
+                    <h2 className="round">Round {round}</h2>
                 <div className="main-game-area">
                     <div className="player screen_half">
                         <div className="player-screen">
-                            <PlayerScreen playerInfo={player} playerCard={playerCard[0]} onClick={runTurn}></PlayerScreen>
+                            <PlayerScreen attacker={attacker} defender={defender} playersTurn={playersTurn} playerInfo={player} playerCard={playerCard[0]} onClick={runTurn}></PlayerScreen>
                         </div>
                     </div>
                     <div className="computer screen_half">
                         <div className="player-screen">
-                            <PlayerScreen playerInfo={opponent} playerCard={opponentCard[0]} onClick={runTurn}></PlayerScreen>
+                            <PlayerScreen attacker={attacker} defender={defender} playersTurn={playersTurn} playerInfo={opponent} playerCard={opponentCard[0]} onClick={runTurn}></PlayerScreen>
                         </div>
                     </div>
                 </div>

@@ -7,22 +7,21 @@ import GameScreen from './screens/GameScreen.js';
 export default function App() {
   const [player, setPlayer] = useState('');
   const [opponent, setOpponent] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
 
   useState(() => {
+    setIsLoading(true)
     let playerInfo = player_Data;
     let opponentInfo = opponent_Data;
     setPlayer(playerInfo)
     setOpponent(opponentInfo)
-  }, [player, setPlayer, opponent, setOpponent])
+    setIsLoading(false)
+  }, [player, setPlayer, opponent, setOpponent, setIsLoading])
 
  
     return (
       <div className="App">
-       
-      <GameScreen player={player} opponent={opponent}></GameScreen>
-        
-        
+       {isLoading === true ? <></> : <GameScreen isLoading={isLoading} player={player} opponent={opponent}></GameScreen>}
       </div>
     );
 
