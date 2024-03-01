@@ -22,14 +22,14 @@ export default function PlayerScreen({ attacker, defender, playerInfo, playerCar
                 
             </div>
             <div className="card-area" style={{borderColor: attacker.creature === selectedCard.creature ? 'red' : 'black'}}>
-                <h3 className="card-title">{selectedCard.creature}</h3>
-                <div className="health" data={selectedCard.healthpoints > 0 ? selectedCard.healthpoints : 'dead'}>Health: {selectedCard.healthpoints > 0 ? selectedCard.healthpoints : 0}</div>
-                <div className="weaponskill">Weapon Skill: {selectedCard.weaponskill}</div>
-                <div className="strength">Strength: {selectedCard.strength}</div>
-                <div className="toughness">Toughness: {selectedCard.toughness}</div>
-                <div className="manapoints">Mana points: {selectedCard.manapoints}</div>
-                <div className="magicresistance">Magic Resistance: {selectedCard.magicresistance}</div>
-                <div className="speed">Speed: {selectedCard.speed}</div>
+                <h3 className="card-data card-title">{selectedCard.creature}</h3>
+                <div className="card-data health" data={selectedCard.healthpoints > 0 ? selectedCard.healthpoints : 'dead'}>Health: {selectedCard.healthpoints >= 0 ? selectedCard.healthpoints : 0}</div>
+                <div className="card-data weaponskill">Weapon Skill: {selectedCard.weaponskill}</div>
+                <div className="card-data strength">Strength: {selectedCard.strength}</div>
+                <div className="card-data toughness">Toughness: {selectedCard.toughness}</div>
+                <div className="card-data manapoints">Mana points: {selectedCard.manapoints}</div>
+                <div className="card-data magicresistance">Magic Resistance: {selectedCard.magicresistance}</div>
+                <div className="card-data speed">Speed: {selectedCard.speed}</div>
             </div>
             <div className='attacks'>
                 {/* {selectedCard.attacks.map((attack, i) =>

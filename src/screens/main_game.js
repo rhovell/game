@@ -17,13 +17,8 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     const [turn, setTurn] = useState(1);
     const [attacker, setAttacker] = useState('');
     const [defender, setDefender] = useState('');
-    
-    // const [isAttack, setIsAttack] = useState(false);
 
-
-    
-    useState(() => {
-        // console.warn('useState');
+    useEffect(() => {
         let player_speed = playerCard[0].speed;
         let opponent_speed = opponentCard[0].speed;
         let fastest = Math.max(player_speed, opponent_speed)
@@ -47,12 +42,10 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     
     const endGame = useCallback(() => {
         console.warn('end game!');
-        // let player_health = attacker.healthpoints;
-        // let opponent_health = defender.healthpoints;
         let winnerName;
         if(attacker.healthpoints <= 0){
             console.warn(attacker.creature, 'wins!');
-            setWinner(attacker)
+            setWinner(attacker.creature)
             winnerName = attacker.creature
         } else if(defender.healthpoints <= 0){
             console.warn(defender.creature, 'wins!');
@@ -61,9 +54,8 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         }
         setAutomated(false)
         return winnerName
-        
-        // setAutomated(false)
-    }, [setWinner, opponentCard, playerCard, setAutomated])
+
+    }, [setWinner, setAutomated, attacker, defender])
 
     const switchPlayer = useCallback(() => {
         
@@ -128,7 +120,6 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
 
     
     const runTurn = useCallback(() => {
-        
         console.warn('**************** New Turn ***********');        
         calculateMiss(1)
     }, [calculateMiss])
