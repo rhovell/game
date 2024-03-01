@@ -12,8 +12,7 @@
             "toughness": 4,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 9,
-            "attacks": ["claw", "bite", "slash"," gnaw"]
+            "speed": 9
         },
         {
             "creature": "Troll",
@@ -24,8 +23,7 @@
             "toughness": 6,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 3,
-            "attacks": ["hammer", "bash", "stomp", "gawp"]
+            "speed": 3
         },
         {
             "creature": "Zombie",
@@ -36,8 +34,7 @@
             "toughness": 8,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 2,
-            "attacks": ["stumble", "claw", "bite", "gnaw"]
+            "speed": 2
         },
         {
             "creature": "Goblin",
@@ -48,8 +45,7 @@
             "toughness": 5,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 4,
-            "attacks": ["shank", "claw", "punch", "batter"]
+            "speed": 4
         },
         {
             "creature": "Elf",
@@ -60,8 +56,7 @@
             "toughness": 3,
             "manapoints": 0,
             "magicresistance": 0,
-            "speed": 5,
-            "attacks": ["shoot", "glamour", "slash"]
+            "speed": 5
         }
     ]
 }

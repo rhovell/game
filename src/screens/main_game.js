@@ -18,6 +18,7 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     const [attacker, setAttacker] = useState('');
     const [defender, setDefender] = useState('');
 
+    // start of game - set attacker and defender by fastest
     useEffect(() => {
         let player_speed = playerCard[0].speed;
         let opponent_speed = opponentCard[0].speed;
@@ -44,13 +45,13 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         console.warn('end game!');
         let winnerName;
         if(attacker.healthpoints <= 0){
-            console.warn(attacker.creature, 'wins!');
-            setWinner(attacker.creature)
-            winnerName = attacker.creature
-        } else if(defender.healthpoints <= 0){
             console.warn(defender.creature, 'wins!');
             setWinner(defender.creature)
             winnerName = defender.creature
+        } else if(defender.healthpoints <= 0){
+            console.warn(attacker.creature, 'wins!');
+            setWinner(attacker.creature)
+            winnerName = attacker.creature
         }
         setAutomated(false)
         return winnerName
@@ -63,20 +64,39 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         console.warn(`*********** end turn ${turn} ******************`);
 
         setTurn(turn => turn + 1)
-        if(turn % 2 === 0){
-            // even turns
+
+        if(turn % 2 !== 0){
+            console.warn('odd turn');
+            // odd turns
+            if (playersTurn === false) {
+                setPlayersTurn(true)
+                setAttacker(playerCard[0])
+                setDefender(opponentCard[0])
+            } else {
+                setPlayersTurn(false)
+                setDefender(playerCard[0])
+                setAttacker(opponentCard[0])
+            }
+        } else if(turn % 2 === 0){
+            let player_speed = playerCard[0].speed;
+            let opponent_speed = opponentCard[0].speed;
+            let fastest = Math.max(player_speed, opponent_speed)
+            if (fastest === player_speed) {
+                setPlayersTurn(true)
+                setAttacker(playerCard[0])
+                setDefender(opponentCard[0])
+                console.warn(playerCard[0].creature, 'is fastest');
+            } else {
+                setPlayersTurn(false)
+                setAttacker(opponentCard[0])
+                setDefender(playerCard[0])
+                console.warn(opponentCard[0].creature, 'is fastest');
+            }
             setRound(round => round + 1)
+            // even turns
+            console.warn('even turn');
         }
         console.warn('end round', round, 'turn', turn);
-        if (playersTurn === false) {
-            setPlayersTurn(true)
-            setAttacker(playerCard[0])
-            setDefender(opponentCard[0])
-        } else {
-            setPlayersTurn(false)
-            setDefender(playerCard[0])
-            setAttacker(opponentCard[0])
-        }
 
         if (attacker.healthpoints > 0 && defender.healthpoints > 0) {
             if(automated === true){
