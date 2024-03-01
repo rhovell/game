@@ -39,6 +39,21 @@
 .card-data {
     transition: color 2s linear 0s;
 }
+.attacks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+}
+.attacks div {
+    width: calc(50% - 20px);
+    margin: 10px auto;
+    
+}
+.attack-button {
+    width: 100%;
+}
 h3.winner[winner="true"] {
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
     animation: flash 5s ease-in-out 0.5s 1 forwards;

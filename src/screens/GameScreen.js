@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import SelectCardScreen from './Select_card.js'
 import MainScreen from './main_game.js';
 
@@ -7,24 +7,24 @@ export default function GameScreen({player, opponent}) {
   const [opponentCard, setOpponentCard] = useState('')
 
 
-    function selectPlayerCard(card){
+    const selectPlayerCard = useCallback((card) => {
        let selectedCard = card.target.id;
        console.warn('selectedCard', selectedCard);
        let cardList = player.cardList;
        let choosenCard = cardList.filter( key => key['creature'] === selectedCard)
     //    console.warn(choosenCard);
        setPlayerCard(choosenCard)
-     }
+     }, [setPlayerCard])
      
 
-  function selectOpponentCard(card) {
+  const selectOpponentCard = useCallback((card) => {
     let selectedCard = card.target.id;
     console.warn('selectedCard', selectedCard);
     let cardList = opponent.cardList;
     let choosenCard = cardList.filter(key => key['creature'] === selectedCard)
     // console.warn(choosenCard);
     setOpponentCard(choosenCard)
-  }
+  }, [setOpponentCard])
 
     return (
       <div className="game-screen">

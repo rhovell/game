@@ -1,9 +1,10 @@
 import './styles/MainScreen.css';
 import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
-// import opponent from '../data/opponent.json';
+import attackList from '../data/attack_sheet.json';
 // import player from '../data/player.json';
 import PlayerScreen from './PlayerScreen.js'
+import OpponentScreen from './OpponentScreen.js';
 
 
 export default function MainScreen({ playerCard, opponentCard, opponent, player}) {
@@ -17,9 +18,12 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     const [turn, setTurn] = useState(1);
     const [attacker, setAttacker] = useState('');
     const [defender, setDefender] = useState('');
+    const [attacks, setAttacks] = useState([])
 
     // start of game - set attacker and defender by fastest
     useEffect(() => {
+        let attackData = attackList.attacks;
+        setAttacks(attackData)
         let player_speed = playerCard[0].speed;
         let opponent_speed = opponentCard[0].speed;
         let fastest = Math.max(player_speed, opponent_speed)
@@ -38,7 +42,7 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         console.warn('attacker is', playerCard[0].creature, '- healthpoints: ', playerCard[0].healthpoints);
         console.warn('defender is', opponentCard[0].creature, '- healthpoints: ', opponentCard[0].healthpoints);
         }
-    }, [setPlayersTurn, playerCard, opponentCard, setAttacker, setDefender])
+    }, [setPlayersTurn, playerCard, opponentCard, setAttacker, setDefender, setAttacks, attackList])
 
     
     const endGame = useCallback(() => {
@@ -110,7 +114,7 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     }, [playersTurn, setPlayersTurn, endGame, player, opponent, turn, round, attacker, defender, automated, opponentCard, playerCard, playersTurn])
 
    // If the first attack missed, the attacker has another chance of attacking.
-   const miss = useCallback((attackNumber) => {
+   const miss = useCallback((attackNumber, chosenAttack) => {
         console.warn(attacker.creature, attackNumber, ' attack missed!');
         if(attackNumber === 1){
             // If the first attack missed, the attacker has another chance of attacking.
@@ -125,7 +129,8 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
     }, [attacker, defender, switchPlayer, endGame, tryAgain])
             
     // Calculate the chance that the attacker will miss their attack
-    const calculateMiss = useCallback((attackNumber) => {
+    const calculateMiss = useCallback((attackNumber, chosenAttack) => {
+        
         let missChance = 1 * ((defender.speed * defender.weaponskill) / (attacker.speed * attacker.weaponskill))
         console.warn(attacker.creature, 'has', missChance, '% chance of miss on attack number ', attackNumber) ;
         // Dependant on their chances, run hit or miss:
@@ -140,7 +145,7 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
 
     
     const runTurn = useCallback(() => {
-        console.warn('**************** New Turn ***********');        
+
         calculateMiss(1)
     }, [calculateMiss])
 
@@ -210,6 +215,58 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
         }
     }
 
+
+    function specialAttack(chosenAttack){
+        console.warn('attack', chosenAttack);
+        let attackList = attacks.filter(attack => attack.Attackname === chosenAttack)
+        console.warn(attackList[0]);
+        let currentAttack = attackList[0];
+        console.warn(currentAttack);
+
+        if(currentAttack.drain === false){
+            console.warn('attack is boosting', attacker.creature);
+            if(currentAttack.weaponskill !== 1){
+                attacker.weaponskill = attacker.weaponskill * currentAttack.weaponskill;
+            }
+            if(currentAttack.speed !== 1){
+                attacker.speed = attacker.speed * currentAttack.speed;
+            }
+            if(currentAttack.strength !== 1){
+                attacker.strength = attacker.strength * currentAttack.strength;
+            }
+            if(currentAttack.toughness !== 1){
+                attacker.toughness = attacker.toughness * currentAttack.toughness;
+            }
+            if(currentAttack.manapoints !== 1){
+                attacker.manapoints = attacker.manapoints * currentAttack.manapoints;
+            }
+            if(currentAttack.magicresistance !== 1){
+                attacker.magicresistance = attacker.magicresistance * currentAttack.magicresistance;
+            }
+        } else if(currentAttack.drain === true){
+            console.warn('attack is draining', defender.creature);
+            if(currentAttack.weaponskill !== 1){
+                defender.weaponskill = defender.weaponskill * currentAttack.weaponskill;
+            }
+            if(currentAttack.speed !== 1){
+                defender.speed = defender.speed * currentAttack.speed;
+            }
+            if(currentAttack.strength !== 1){
+                defender.strength = defender.strength * currentAttack.strength;
+            }
+            if(currentAttack.toughness !== 1){
+                defender.toughness = defender.toughness * currentAttack.toughness;
+            }
+            if(currentAttack.manapoints !== 1){
+                defender.manapoints = defender.manapoints * currentAttack.manapoints;
+            }
+            if(currentAttack.magicresistance !== 1){
+                defender.magicresistance = defender.magicresistance * currentAttack.magicresistance;
+            }
+        }
+        runTurn()
+    }
+
     const element = React.useRef(null)
 
     function setAuto(){
@@ -236,12 +293,12 @@ export default function MainScreen({ playerCard, opponentCard, opponent, player}
                 <div className="main-game-area">
                     <div className="player screen_half">
                         <div className="player-screen">
-                            <PlayerScreen attacker={attacker} defender={defender} playersTurn={playersTurn} playerInfo={player} playerCard={playerCard[0]} onClick={runTurn}></PlayerScreen>
+                            <PlayerScreen screenOwner={player} attacker={attacker} defender={defender} playersTurn={playersTurn} player={player} opponent={opponent} playerCard={playerCard[0]} onClick={runTurn} specialAttack={specialAttack}></PlayerScreen>
                         </div>
                     </div>
                     <div className="computer screen_half">
                         <div className="player-screen">
-                            <PlayerScreen attacker={attacker} defender={defender} playersTurn={playersTurn} playerInfo={opponent} playerCard={opponentCard[0]} onClick={runTurn}></PlayerScreen>
+                            <OpponentScreen screenOwner={opponent} attacker={attacker} defender={defender} playersTurn={playersTurn} player={player} opponent={opponent} playerCard={opponentCard[0]} onClick={runTurn} specialAttack={specialAttack}></OpponentScreen>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useState, useEffect }  from 'react';
 import AttackButton from './components/AttackButton'
 
-export default function PlayerScreen({ 
+export default function OpponentScreen({ 
     attacker, 
     defender, 
     screenOwner, 
