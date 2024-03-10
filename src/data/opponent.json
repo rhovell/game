@@ -1,5 +1,5 @@
 {
-    "username": "Computer",
+    "username": "Opponent",
     "level": 1,
     "points": 0,
     "cardList": [
@@ -7,7 +7,7 @@
             "creature": "Wolpertinger",
             "level": 1,
             "healthpoints": 30,
-            "weaponskill": 8,
+            "weaponskill": 10,
             "strength": 3,
             "toughness": 4,
             "manapoints": 0,
@@ -16,7 +16,24 @@
             "attack_1": ["Scratch", 1],
             "attack_2": ["Growl", 1],
             "attack_3": ["Flying Claw", 1],
-            "attack_4": ["Double Strike", 1]
+            "attack_4": ["Double Strike", 1],
+            "id": "opp_1"
+        },
+        {
+            "creature": "Wolpertinger",
+            "level": 10,
+            "healthpoints": 30,
+            "weaponskill": 10,
+            "strength": 3,
+            "toughness": 4,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 9,
+            "attack_1": ["Scratch", 1],
+            "attack_2": ["Growl", 1],
+            "attack_3": ["Flying Claw", 1],
+            "attack_4": ["Double Strike", 1],
+            "id": "opp_2"
         },
         {
             "creature": "Troll",
@@ -31,7 +48,8 @@
             "attack_1": ["Club", 1],
             "attack_2": ["Bite", 1],
             "attack_3": ["Hedbutt", 1],
-            "attack_4": ["Skull Crush", 1]
+            "attack_4": ["Skull Crush", 1],
+            "id": "opp_3"
         },
         {
             "creature": "Zombie",
@@ -44,9 +62,42 @@
             "magicresistance": 0,
             "speed": 2,
             "attack_1": ["Stumble", 1],
-            "attack_2": ["Scratch", 1],
-            "attack_3": ["Poison Bite", 1],
-            "attack_4": ["Lunge", 1]
+            "attack_2": ["Scratch", 5],
+            "attack_3": ["Poison Bite", 10],
+            "attack_4": ["Lunge", 20],
+            "id": "opp_4"
+        },
+        {
+            "creature": "Zombie",
+            "level": 5,
+            "healthpoints": 90,
+            "weaponskill": 3,
+            "strength": 5,
+            "toughness": 8,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 2,
+            "attack_1": ["Stumble", 1],
+            "attack_2": ["Scratch", 5],
+            "attack_3": ["Poison Bite", 10],
+            "attack_4": ["Lunge", 20],
+            "id": "opp_5"
+        },
+        {
+            "creature": "Zombie",
+            "level": 10,
+            "healthpoints": 100,
+            "weaponskill": 4,
+            "strength": 6,
+            "toughness": 9,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 4,
+            "attack_1": ["Stumble", 1],
+            "attack_2": ["Scratch", 5],
+            "attack_3": ["Poison Bite", 10],
+            "attack_4": ["Lunge", 20],
+            "id": "opp_6"
         },
         {
             "creature": "Goblin",
@@ -61,7 +112,8 @@
             "attack_1": ["Scratch", 1],
             "attack_2": ["Spit", 1],
             "attack_3": ["Bite", 1],
-            "attack_4": ["Shiv", 1]
+            "attack_4": ["Shiv", 1],
+            "id": "opp_7"
         },
         {
             "creature": "Elf",
@@ -76,7 +128,24 @@
             "attack_1": ["Slash", 1],
             "attack_2": ["Sword Dance", 1],
             "attack_3": ["Double Strike", 1],
-            "attack_4": ["Blade Storm", 1]
+            "attack_4": ["Blade Storm", 1],
+            "id": "opp_8"
+        },
+        {
+            "creature": "Elf",
+            "level": 3,
+            "healthpoints": 35,
+            "weaponskill": 7,
+            "strength": 5,
+            "toughness": 3,
+            "manapoints": 0,
+            "magicresistance": 0,
+            "speed": 5,
+            "attack_1": ["Slash", 1],
+            "attack_2": ["Sword Dance", 5],
+            "attack_3": ["Double Strike", 10],
+            "attack_4": ["Blade Storm", 11],
+            "id": "opp_9"
         }
     ]
 }

@@ -1,0 +1,12 @@
+.open-combatant-menu img {
+    width: 16px;
+    height: auto;
+}
+.menu-button {
+    padding: 0;
+}
+
+.transparent {
+    background-color: transparent;
+    border: 0;
+}

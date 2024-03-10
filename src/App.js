@@ -1,29 +1,38 @@
-import './App.css';
+import './App.scss';
 import opponent_Data from './data/opponent.json';
 import player_Data from './data/player.json';
-import { useState } from 'react';
-import GameScreen from './screens/GameScreen.js';
+import React, { useState, useCallback, useEffect, Suspense, startTransition } from 'react';
+
+import attackList from './data/attack_sheet.json';
+import EnterBattleScreen from "./screens/Battle_Screens/EnterBattleScreen";
+import Layout from './Layout'
 
 export default function App() {
-  const [player, setPlayer] = useState('');
-  const [opponent, setOpponent] = useState('');
+  const player = player_Data;
+  const opponent = opponent_Data;
   const [isLoading, setIsLoading] = useState(false);
+  const [gameState, setGameState] = useState('game')
 
-  useState(() => {
-    setIsLoading(true)
-    let playerInfo = player_Data;
-    let opponentInfo = opponent_Data;
-    setPlayer(playerInfo)
-    setOpponent(opponentInfo)
-    setIsLoading(false)
-  }, [player, setPlayer, opponent, setOpponent, setIsLoading])
-
- 
-    return (
-      <div className="App">
-       {isLoading === true ? <></> : <GameScreen isLoading={isLoading} player={player} opponent={opponent}></GameScreen>}
-      </div>
-    );
-
-  
+  return (
+    <div className="App">
+      <Layout>
+        <Suspense fallback={<BigSpinner />}>
+          <EnterBattleScreen
+            player={player}
+            opponent={opponent}
+          >
+          </EnterBattleScreen>
+        </Suspense>
+      </Layout>
+    </div >
+  )
 }
+
+
+function BigSpinner() {
+  return <h2>🌀 Loading...</h2>;
+}
+
+
+
+

@@ -22,4 +22,9 @@ li.card {
     padding: 30px;
     border: 3px solid black;
     list-style-type: none;
+    cursor: pointer;
+    &[disabled] {
+        cursor: default;
+        opacity: 0.5;
+    }
 }

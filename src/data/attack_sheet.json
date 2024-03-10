@@ -1,212 +1,314 @@
 {
-    "attacks": [
-        {
-            "Attackname": "Scratch",
-            "healthpoints": 1,
-            "weaponskill": 1.25,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Club",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 0.75,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1,
-            "drain": true,
-            "boost": false
-        },
-        {
-            "Attackname": "Stumble",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 0,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Slash",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1.1,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Growl",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 0.8,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1,
-            "drain": true,
-            "boost": false
-        },
-        {
-            "Attackname": "Bite",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1.2,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Sword Dance",
-            "healthpoints": 1,
-            "weaponskill": 1.25,
-            "strength": 1.1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1.1,
-            "totaldamage": 1,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Spit",
-            "healthpoints": 1,
-            "weaponskill": 0.5,
-            "strength": 0.8,
-            "toughness": 0.8,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 0.8,
-            "totaldamage": 1,
-            "drain": true,
-            "boost": false
-        },
-        {
-            "Attackname": "Flying Claw",
-            "healthpoints": 1,
-            "weaponskill": 2,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1.5,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Headbutt",
-            "healthpoints": 1,
-            "weaponskill": 2,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1.5,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Zombie Bite",
-            "healthpoints": 1,
-            "weaponskill": 0.9,
-            "strength": 0.75,
-            "toughness": 0.8,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 0.9,
-            "totaldamage": 1,
-            "drain": true,
-            "boost": false
-        },
-        {
-            "Attackname": "Double Strike",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 2,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Skull Crush",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 2.5,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Lunge",
-            "healthpoints": 1,
-            "weaponskill": 1,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 10,
-            "totaldamage": 1,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Blade Storm",
-            "healthpoints": 1,
-            "weaponskill": 1.2,
-            "strength": 1,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1.2,
-            "totaldamage": 2.5,
-            "drain": false,
-            "boost": true
-        },
-        {
-            "Attackname": "Shiv",
-            "healthpoints": 1,
-            "weaponskill": 0.8,
-            "strength": 0.9,
-            "toughness": 1,
-            "manapoints": 1,
-            "magicresistance": 1,
-            "speed": 1,
-            "totaldamage": 1.5,
-            "drain": true,
-            "boost": false
-        }
-    ]
+    "Scratch": {
+        "Attackname": "Scratch",
+        "drain": false,
+        "duration": 1,
+        "combatant": true,
+        "damage": false,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1.25,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Club": {
+        "Attackname": "Club",
+        "drain": true,
+        "duration": 4,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 0.75,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Stumble": {
+        "Attackname": "Stumble",
+        "drain": false,
+        "duration": 1,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 0
+            }
+        ]
+    },
+    "Slash": {
+        "Attackname": "Slash",
+        "drain": false,
+        "duration": 1,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1.1
+            }
+        ]
+    },
+    "Growl": {
+        "Attackname": "Growl",
+        "drain": true,
+        "duration": 4,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 0.8,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Bite": {
+        "Attackname": "Bite",
+        "drain": false,
+        "duration": 1,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1.2
+            }
+        ]
+    },
+    "Sword Dance": {
+        "Attackname": "Sword Dance",
+        "drain": false,
+        "duration": 6,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1.25,
+                "strength": 1.1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1.1,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Spit": {
+        "Attackname": "Spit",
+        "drain": true,
+        "duration": 6,
+        "combatant": true,
+        "damage": false,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 0.5,
+                "strength": 0.8,
+                "toughness": 0.8,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 0.8,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Flying Claw": {
+        "Attackname": "Flying Claw",
+        "drain": false,
+        "duration": 1,
+        "combatant": true,
+        "damage": false,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 2,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1.5,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Headbutt": {
+        "Attackname": "Headbutt",
+        "drain": false,
+        "duration": 1,
+        "combatant": true,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 2,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1.5
+            }
+        ]
+    },
+    "Zombie Bite": {
+        "Attackname": "Zombie Bite",
+        "drain": true,
+        "duration": 10,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 0.9,
+                "strength": 0.75,
+                "toughness": 0.8,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 0.9,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Double Strike": {
+        "Attackname": "Double Strike",
+        "drain": false,
+        "duration": 1,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 2
+            }
+        ]
+    },
+    "Skull Crush": {
+        "Attackname": "Skull Crush",
+        "healthpoints": 1,
+        "weaponskill": 1,
+        "strength": 1,
+        "toughness": 1,
+        "manapoints": 1,
+        "magicresistance": 1,
+        "speed": 1,
+        "totaldamage": 2.5,
+        "drain": false,
+        "duration": 1,
+        "combatant": false,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 2.5
+            }
+        ]
+    },
+    "Lunge": {
+        "Attackname": "Lunge",
+        "drain": false,
+        "duration": 3,
+        "combatant": true,
+        "damage": false,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 10,
+                "totaldamage": 1
+            }
+        ]
+    },
+    "Blade Storm": {
+        "Attackname": "Blade Storm",
+        "drain": false,
+        "duration": 1,
+        "combatant": true,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 1.2,
+                "strength": 1,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1.2,
+                "totaldamage": 2.5
+            }
+        ]
+    },
+    "Shiv": {
+        "Attackname": "Shiv",
+        "drain": true,
+        "duration": 6,
+        "combatant": true,
+        "damage": true,
+        "modifiers": [
+            {
+                "healthpoints": 1,
+                "weaponskill": 0.8,
+                "strength": 0.9,
+                "toughness": 1,
+                "manapoints": 1,
+                "magicresistance": 1,
+                "speed": 1,
+                "totaldamage": 1.5
+            }
+        ]
+    }
 }

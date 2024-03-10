@@ -1,10 +1,10 @@
 import React from 'react';
-import { useState, useEffect }  from 'react';
 
-export default function AttackButton({ className, attack, specialAttack }) {
+export default function AttackButton({ className, attack, specialAttack, openCombatantMenu }) {
 // console.warn(player);
     function handleClick(attack){
         specialAttack(attack)
+        openCombatantMenu()
     }
  
     return (

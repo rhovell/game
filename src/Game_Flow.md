@@ -1,5 +1,12 @@
 # Game Flow
 
+Player selects up to 4 team mates
+
+
+
+
+
+
 First attacker decision runs when playerCard/opponentCard props are loaded - attacker is decided by who is fastest - this decides the UI 
 
 ## Standard Attack
@@ -44,4 +51,9 @@ If either player's health reaches 0 or below, the game ends:
 
 
 
+
+## Special Attack
+
+Attack type is selected on button click - the corresponding attack data is then found in the database, and the modifiers are applied to the relevant combatants.
+`specialAttack()`
 
